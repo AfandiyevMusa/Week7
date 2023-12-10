@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rock, Paper, Scissors</title>
+</head>
+<body>
+    <h1>Rock, Paper, Scissors Game</h1>
+    
+    <div>
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+    </div>
+    
+    <div>
+        <p>Your choice: <span id="userChoice"></span></p>
+        <p>Computer's choice: <span id="computerChoice"></span></p>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        const userChoiceDisplay = document.getElementById('userChoice');
+        const computerChoiceDisplay = document.getElementById('computerChoice');
+        const resultDisplay = document.getElementById('result');
+
+        const choices = ['rock', 'paper', 'scissors'];
+
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', () => {
+                const userChoice = button.id;
+                const computerChoice = choices[Math.floor(Math.random() * 3)];
+
+                userChoiceDisplay.textContent = userChoice;
+                computerChoiceDisplay.textContent = computerChoice;
+
+                const winner = determineWinner(userChoice, computerChoice);
+                resultDisplay.textContent = winner;
+            });
+        });
+
+        function determineWinner(user, computer) {
+            if (user === computer) {
+                return "It's a tie!";
+            }
+
+            if (
+                (user === 'rock' && computer === 'scissors') ||
+                (user === 'paper' && computer === 'rock') ||
+                (user === 'scissors' && computer === 'paper')
+            ) {
+                return "You win!";
+            }
+
+            return "Computer wins!";
+        }
+    </script>
+</body>
+</html>
